@@ -7,7 +7,7 @@ export default function Logo(props) {
     <Box {...props}>
       <Text fontSize="lg" fontWeight="bold">
         <Link href={'/'}>
-          SIRES
+          CONOFI
         </Link>
       </Text>
     </Box>
