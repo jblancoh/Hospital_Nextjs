@@ -5,14 +5,18 @@ import {
   FormControl,
   FormLabel,
   Input,
-  InputRightElement,
-  InputGroup,
   Button,
-  FormHelperText,
-  Link,
+  HStack,
   Stack,
-  Box
+  Box,
+  ButtonGroup,
+  NumberInput,
+  NumberInputField,
+  Select,
+  Flex,
+  Textarea
 } from '@chakra-ui/react'
+import { FaLessThanEqual } from 'react-icons/fa'
 
 const FormDocument = () => {
   const [showPassword, setShowPassword] = useState(false)
@@ -23,51 +27,124 @@ const FormDocument = () => {
     router.push('documentsSent')
   }
   return (
-    <>
-      <Box
-        padding="4"
-        minW={{ base: "90%", md: "468px" }}
-      >
-        <form>
-          <Stack
-            spacing={4}
-            p="1rem"
-            boxShadow="md"
-          >
-            <FormControl>
-              <FormLabel>Numero de oficio</FormLabel>
-              <Input type="text" />
-              <FormLabel>Fecha de oficio</FormLabel>
-              <Input type="text" />
-              <FormLabel>Contraseña</FormLabel>
-              {/* <InputGroup>
-                <Input type={showPassword ? "text" : "password"} />
-                <InputRightElement w="4.5rem">
-                  <Button
-                    h="1.75rem"
-                    size="sm"
-                    onClick={handleShowClick}
-                  >
-                    {showPassword ? "Hide" : "Show"}
-                  </Button>
-                </InputRightElement>
-              </InputGroup> */}
-            </FormControl>
-            <Button
-              borderRadius={0}
-              type="submit"
-              variant="solid"
-              w="full"
-              colorScheme="telegram"
-            // onClick={_login}
-            >
-              Iniciar
-            </Button>
-          </Stack>
-        </form>
-      </Box>
-    </>
+    <Flex
+      padding="4"
+      alignItems="center"
+      justifyContent="center"
+      flexDir="column"
+      w="100%"
+      mt={25}
+    >
+      <FormControl>
+
+        <HStack spacing="24px" mb={5}>
+          <FormControl>
+            <FormLabel fontSize={11}>Numero de oficio</FormLabel>
+            <NumberInput size="sm" maxW={500} defaultValue={15} disabled={true}>
+              <NumberInputField />
+            </NumberInput>
+          </FormControl>
+        </HStack>
+        <HStack>
+          <FormControl isRequired>
+            <FormLabel fontSize={11}>Fecha de oficio</FormLabel>
+            <Input type="datetime-local" />
+            <FormLabel fontSize={11}> Fecha de Acuse</FormLabel>
+            <Input type="datetime-local" />
+          </FormControl>
+        </HStack>
+        <HStack mb={5}>
+          <FormControl isRequired>
+            <FormLabel fontSize={11}>Municipio o Instituto</FormLabel>
+            <Select size="lg" variant="flushed" placeholder="Flushed" />
+          </FormControl>
+          <FormControl isRequired>
+            <FormLabel fontSize={11}>Área o Depto</FormLabel>
+            <Select size="lg" variant="flushed" placeholder="Flushed" />
+          </FormControl>
+          <FormControl isRequired>
+            <FormLabel fontSize={11}>Unidad o Dirección</FormLabel>
+            <Select size="lg" variant="flushed" placeholder="Flushed" />
+          </FormControl>
+        </HStack>
+        <HStack spacing="24px" mb={5}>
+          <FormControl id="name_dirigido" isRequired>
+            <FormLabel fontSize={11}>Dirigido a</FormLabel>
+            <Input type="text" />
+          </FormControl>
+        </HStack>
+        <HStack spacing="24px" mb={5}>
+          <FormControl>
+            <FormLabel fontSize={11}>Asunto</FormLabel>
+            <Input type="text" />
+          </FormControl>
+        </HStack>
+        <HStack mb={5}>
+          <FormControl isRequired>
+            <FormLabel fontSize={11}>Unidad o Dirección Solicitante</FormLabel>
+            <Select size="lg" variant="flushed" placeholder="Flushed" />
+          </FormControl>
+          <FormControl isRequired>
+            <FormLabel fontSize={11}>Área o Depto Solicitante</FormLabel>
+            <Select size="lg" variant="flushed" placeholder="Flushed" />
+          </FormControl>
+        </HStack>
+        <HStack spacing="24px" mb={5}>
+          <FormControl>
+            <FormLabel fontSize={11}>Solicitante</FormLabel>
+            <Input type="text" />
+          </FormControl>
+        </HStack>
+        <HStack spacing="24px" mb={5}>
+          <FormControl>
+            <FormLabel fontSize={11}>Tipo de Referencia</FormLabel>
+            <Select size="lg" variant="flushed" placeholder="Flushed" />
+          </FormControl>
+        </HStack>
+        <HStack spacing="24px" mb={5}>
+          <FormControl>
+            <FormLabel fontSize={11}>Oficio de Referencia </FormLabel>
+            <Input type="text" />
+          </FormControl>
+        </HStack>
+        <HStack spacing="24px" mb={5}>
+          <FormControl>
+            <FormLabel fontSize={11}>Observaciones</FormLabel>
+            <Textarea type="text" />
+          </FormControl>
+        </HStack>
+        <HStack spacing="24px" mb={5}>
+          <FormControl>
+            <FormLabel fontSize={11}>Oficio Digital</FormLabel>
+            <Input type="file" />
+          </FormControl>
+        </HStack>
+        <HStack spacing="24px" mb={5}>
+          <FormControl>
+            <FormLabel fontSize={11}>Estatus</FormLabel>
+            <Select size="lg" variant="flushed" placeholder="Flushed" />
+          </FormControl>
+        </HStack>
+        <ButtonGroup variant="outline" spacing="6">
+          <Button
+            variant="solid"
+            colorScheme="telegram"
+            type="submit"
+          >Guardar</Button>
+          <Button
+            variant="solid"
+            type="reset"
+            onClick={() => { }}
+          >Limpiar</Button>
+        </ButtonGroup>
+      </FormControl>
+    </Flex>
   )
 }
+
+// 
+// 
+// 
+// Estatus
 
 export default FormDocument

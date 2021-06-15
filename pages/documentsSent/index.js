@@ -1,28 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import FormDocument from '@components/FormDocument/FormDocument'
 import {
-  Container,
-  Grid,
-  GridItem,
-  Divider
+  Divider,
+  Flex,
+  Heading,
+  Container
 } from "@chakra-ui/react"
 
 const DocumentsSent = () => {
   return (
-    <Grid
-      h="200px"
-      templateRows="repeat(2, 1fr)"
-      templateColumns="repeat(5, 1fr)"
-      gap={4}
+    <Flex
+      flexDir="column"
+      w="100%"
     >
-      <GridItem colSpan={4} pt="10">
-        <h1>Oficios enviados</h1>
-      </GridItem>
-      <Divider orientation="horizontal" />
-      <GridItem colSpan={4} >
+      <Flex mt={35}>
+        <Heading>Oficios enviados</Heading>
+      </Flex>
+      <Flex>
+        <Divider orientation="horizontal" />
+      </Flex>
+      <Flex>
         <FormDocument />
-      </GridItem>
-    </Grid>
+      </Flex>
+    </Flex>
   );
 }
 

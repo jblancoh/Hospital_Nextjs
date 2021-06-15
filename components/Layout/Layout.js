@@ -12,16 +12,9 @@ const Layout = ({ children }) => {
       {route !== '/login' &&
         <Sidebar />
       }
-      <Flex
-        pos="absolute"
-        top="50%"
-        left="50%"
-        transform="translate(-50%, -50%)"
-      >
-        <Container maxW="container.md" centerContent>
-          {children}
-        </Container>
-      </Flex>
+      <Container w="container.xl" centerContent>
+        {children}
+      </Container>
     </Flex>
   )
 }

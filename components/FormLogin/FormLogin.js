@@ -55,7 +55,6 @@ const FormLogin = () => {
               </FormHelperText>
             </FormControl>
             <Button
-              borderRadius={0}
               type="submit"
               variant="solid"
               w="full"
