@@ -1,17 +1,28 @@
 import React from 'react'
-import Navbar from '@components/Navbar/Navbar'
+import { useRouter } from 'next/router'
+import Sidebar from '@components/Sidebar/Sidebar'
 import styles from "./layout.module.css";
-import { Container } from '@chakra-ui/react'
+import { Container, Flex } from '@chakra-ui/react'
 
 const Layout = ({ children }) => {
+  const router = useRouter()
+  const { route } = router
   return (
-    <div>
-      <Navbar />
-      <Container maxW="container.md" centerContent>
-        {children}
-      </Container>
-      <footer className={styles.container}>This is the footer</footer>
-    </div>
+    <Flex w="100%">
+      {route !== '/login' &&
+        <Sidebar />
+      }
+      <Flex
+        pos="absolute"
+        top="50%"
+        left="50%"
+        transform="translate(-50%, -50%)"
+      >
+        <Container maxW="container.md" centerContent>
+          {children}
+        </Container>
+      </Flex>
+    </Flex>
   )
 }
 

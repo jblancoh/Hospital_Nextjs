@@ -1,6 +1,7 @@
 # // .gitnignore
 # next.js build output
-.next
+.next/
+.next/static/
 .vscode
 .nvmrc
 # dotenv environment variables file (build for Zeit Now)
@@ -16,3 +17,4 @@ yarn-debug.log*
 yarn-error.log*
 
 .DS_Store
+
