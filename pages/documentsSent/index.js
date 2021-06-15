@@ -1,25 +1,28 @@
 import React, { useEffect, useState } from 'react';
+import FormDocument from '@components/FormDocument/FormDocument'
+import {
+  Container,
+  Grid,
+  GridItem,
+  Divider
+} from "@chakra-ui/react"
 
 const DocumentsSent = () => {
-  // const [services, setServices] = useState([])
-  // useEffect(() => {
-  //   fetch('/api/services')
-  //     .then(response => response.json())
-  //     .then(({ civilizations }) => {
-  //       console.log('data', civilizations)
-  //       setServices(civilizations)
-  //     })
-  //   // return () => {
-  //   //   cleanup
-  //   // }
-  // }, [])
   return (
-    <div>
-      <h1>Oficios enviados</h1>
-      {/* {services.map(civilization => {
-        return <div>{civilization.name}</div>
-      })} */}
-    </div>
+    <Grid
+      h="200px"
+      templateRows="repeat(2, 1fr)"
+      templateColumns="repeat(5, 1fr)"
+      gap={4}
+    >
+      <GridItem colSpan={4} pt="10">
+        <h1>Oficios enviados</h1>
+      </GridItem>
+      <Divider orientation="horizontal" />
+      <GridItem colSpan={4} >
+        <FormDocument />
+      </GridItem>
+    </Grid>
   );
 }
 

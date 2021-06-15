@@ -14,7 +14,7 @@ import {
   Box
 } from '@chakra-ui/react'
 
-const FormLogin = () => {
+const FormDocument = () => {
   const [showPassword, setShowPassword] = useState(false)
   const handleShowClick = () => setShowPassword(!showPassword)
   const router = useRouter()
@@ -35,10 +35,12 @@ const FormLogin = () => {
             boxShadow="md"
           >
             <FormControl>
-              <FormLabel>Usuario</FormLabel>
-              <Input type="email" />
+              <FormLabel>Numero de oficio</FormLabel>
+              <Input type="text" />
+              <FormLabel>Fecha de oficio</FormLabel>
+              <Input type="text" />
               <FormLabel>Contraseña</FormLabel>
-              <InputGroup>
+              {/* <InputGroup>
                 <Input type={showPassword ? "text" : "password"} />
                 <InputRightElement w="4.5rem">
                   <Button
@@ -49,10 +51,7 @@ const FormLogin = () => {
                     {showPassword ? "Hide" : "Show"}
                   </Button>
                 </InputRightElement>
-              </InputGroup>
-              <FormHelperText textAlign="right">
-                <Link>Olvidaste tu contraseña?</Link>
-              </FormHelperText>
+              </InputGroup> */}
             </FormControl>
             <Button
               borderRadius={0}
@@ -60,20 +59,15 @@ const FormLogin = () => {
               variant="solid"
               w="full"
               colorScheme="telegram"
-              onClick={_login}
+            // onClick={_login}
             >
               Iniciar
             </Button>
           </Stack>
         </form>
       </Box>
-      <Box>
-        <Link>
-          Solicitar cuenta
-        </Link>
-      </Box>
     </>
   )
 }
 
-export default FormLogin
+export default FormDocument
