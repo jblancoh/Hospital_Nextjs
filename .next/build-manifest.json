@@ -24,11 +24,6 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/documentsReceived": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/documentsReceived.js"
-    ],
     "/documentsSent": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
