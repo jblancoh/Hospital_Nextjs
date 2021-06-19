@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-// import Link from "next/link"
+import React, { useState, useEffect } from 'react';
+import { useRouter } from "next/router"
 import {
   useDisclosure,
   Flex,
@@ -17,11 +17,33 @@ import { FaPaperPlane, FaRegPaperPlane, FaSignOutAlt } from 'react-icons/fa';
 const Sidebar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [navSize, changeNavSize] = useState("large")
+  const [sentActive, setSentActive] = useState(false)
+  const [receivedActive, setReceivedActive] = useState(false)
+  const router = useRouter()
+
+  useEffect(() => {
+    console.log('router', router.route);
+    switch (router.route) {
+      case '/documentsSent':
+        setSentActive(true)
+        setReceivedActive(false)
+        break;
+      case '/documentsReceived':
+        setReceivedActive(true)
+        setSentActive(false)
+        break;
+      default:
+        break;
+    }
+    return () => {
+    }
+  }, [router])
+
   return (
     <Flex
       pos="sticky"
       left="5"
-      h="95vh"
+      // h="100vh"
       marginTop="2.5vh"
       boxShadow="0 4px 12px 0 rgba(0,0,0,0.05)"
       w={navSize == "small" ? "75px" : "200px"}
@@ -48,8 +70,8 @@ const Sidebar = () => {
             }
           }}
         />
-        <NavItem to='documentsSent' navSize={navSize} icon={FaPaperPlane} title="Oficios enviados" description="" />
-        <NavItem to='documentsReceived' navSize={navSize} icon={FaRegPaperPlane} title="Oficios recibidos" active />
+        <NavItem to='documentsSent' navSize={navSize} icon={FaPaperPlane} title="Oficios enviados" active={sentActive} />
+        <NavItem to='documentsReceived' navSize={navSize} icon={FaRegPaperPlane} title="Oficios recibidos" active={receivedActive} />
         <NavItem to='login' navSize={navSize} icon={FaSignOutAlt} title="Cerrar sesión" />
       </Flex>
       <Flex

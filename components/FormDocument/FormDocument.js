@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { useRouter } from 'next/router'
-
 import {
   FormControl,
   FormLabel,
@@ -17,15 +16,14 @@ import {
   Textarea
 } from '@chakra-ui/react'
 import { FaLessThanEqual } from 'react-icons/fa'
+import FileUpload from '@components/FileUpload/FileUpload'
 
-const FormDocument = () => {
+const FormDocument = ({ formState = {} }) => {
   const [showPassword, setShowPassword] = useState(false)
+  const [initialState, setInitialState] = useState(formState)
+
   const handleShowClick = () => setShowPassword(!showPassword)
-  const router = useRouter()
-  const _login = () => {
-    // Login
-    router.push('documentsSent')
-  }
+  const _updateFilesCb = (file) => console.log('_updateFilesCb', file);
   return (
     <Flex
       padding="4"
@@ -36,7 +34,6 @@ const FormDocument = () => {
       mt={25}
     >
       <FormControl>
-
         <HStack spacing="24px" mb={5}>
           <FormControl>
             <FormLabel fontSize={11}>Numero de oficio</FormLabel>
@@ -115,8 +112,11 @@ const FormDocument = () => {
         </HStack>
         <HStack spacing="24px" mb={5}>
           <FormControl>
-            <FormLabel fontSize={11}>Oficio Digital</FormLabel>
-            <Input type="file" />
+            <FileUpload
+              updateFilesCb={_updateFilesCb}
+              accept=".pdf"
+              label={'Oficio Digital'}
+            />
           </FormControl>
         </HStack>
         <HStack spacing="24px" mb={5}>

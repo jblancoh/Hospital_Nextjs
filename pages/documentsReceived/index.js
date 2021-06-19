@@ -1,4 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import FormDocument from '@components/FormDocument/FormDocument'
+import {
+  Divider,
+  Flex,
+  Heading,
+  Container
+} from "@chakra-ui/react"
 
 const DocumentsReceived = () => {
   // const [services, setServices] = useState([])
@@ -14,12 +21,20 @@ const DocumentsReceived = () => {
   //   // }
   // }, [])
   return (
-    <div>
-      <h1>Oficios recibidos</h1>
-      {/* {services.map(civilization => {
-        return <div>{civilization.name}</div>
-      })} */}
-    </div>
+    <Flex
+      flexDir="column"
+      w="100%"
+    >
+      <Flex mt={35}>
+        <Heading>Oficios recibidos</Heading>
+      </Flex>
+      <Flex>
+        <Divider orientation="horizontal" />
+      </Flex>
+      <Flex>
+        <FormDocument />
+      </Flex>
+    </Flex>
   );
 }
 
