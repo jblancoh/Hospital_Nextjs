@@ -2,7 +2,7 @@ import React from 'react'
 import Layout from '@components/Layout/Layout'
 import { ChakraProvider } from "@chakra-ui/react"
 
-function MyApp({ Component, pageProps }) {
+function Conofi({ Component, pageProps }) {
   return <ChakraProvider>
     <Layout>
       <Component {...pageProps} />
@@ -10,4 +10,4 @@ function MyApp({ Component, pageProps }) {
   </ChakraProvider>
 }
 
-export default MyApp
+export default Conofi

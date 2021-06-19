@@ -1,0 +1,7 @@
+.inputFile {
+  display: none;
+}
+
+.inputFile:focus {
+    outline: none;
+  }
