@@ -1,18 +1,18 @@
 import React, { useState } from 'react'
 import { useRouter } from 'next/router'
 
-import {
-  FormControl,
-  FormLabel,
-  Input,
-  InputRightElement,
-  InputGroup,
-  Button,
-  FormHelperText,
-  Link,
-  Stack,
-  Box
-} from '@chakra-ui/react'
+// import {
+//   FormControl,
+//   FormLabel,
+//   Input,
+//   InputRightElement,
+//   InputGroup,
+//   Button,
+//   FormHelperText,
+//   Link,
+//   Stack,
+//   Box
+// } from '@chakra-ui/react'
 
 const FormLogin = () => {
   const [showPassword, setShowPassword] = useState(false)
@@ -24,7 +24,7 @@ const FormLogin = () => {
   }
   return (
     <>
-      <Box
+      {/* <Box
         padding="4"
         minW={{ base: "90%", md: "468px" }}
       >
@@ -70,7 +70,7 @@ const FormLogin = () => {
         <Link>
           Solicitar cuenta
         </Link>
-      </Box>
+      </Box> */}
     </>
   )
 }
