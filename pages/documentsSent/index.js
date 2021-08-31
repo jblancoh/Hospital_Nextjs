@@ -13,9 +13,6 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    backgroundColor: 'red',
-  },
   container: {
     paddingTop: theme.spacing(4),
     paddingBottom: theme.spacing(4),
@@ -62,6 +59,7 @@ const DocumentsSent = () => {
   return (
     <Container maxWidth="lg" className={classes.container}>
       <Grid container spacing={3}>
+        <Typography component="h1" variant="h6" color="inherit" noWrap >Oficios Enviados</Typography>
         <Grid item xs={12} md={12} lg={12}>
           <Paper className={classes.paper}>
             <Tabs

@@ -14,7 +14,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Toolbar from '@material-ui/core/Toolbar';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import List from '@material-ui/core/List';
-import { mainListItems } from '../ListItems/ListItems'
+import { MainListItems } from '../ListItems/ListItems'
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -100,6 +100,8 @@ const useStyles = makeStyles((theme) => ({
 const Layout = ({ children }) => {
   const router = useRouter()
   const [open, setOpen] = React.useState(true);
+  const [selectedItem, setSelectedItem] = React.useState({});
+
   const { route } = router
   const classes = useStyles();
   const handleDrawer = () => {
@@ -139,7 +141,7 @@ const Layout = ({ children }) => {
           </IconButton>
         </div>
         <Divider />
-        <List>{mainListItems}</List>
+        <List><MainListItems onCLick={(title) => setSelectedItem({ [title]: true })} selected={selectedItem} /></List>
         <Divider />
       </Drawer>
       <main className={classes.content}>

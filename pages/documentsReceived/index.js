@@ -74,6 +74,7 @@ const DocumentsReceived = () => {
   return (
     <Container maxWidth="lg" className={classes.container}>
       <Grid container spacing={3}>
+        <Typography component="h1" variant="h6" color="inherit" noWrap >Oficios Recibidos</Typography>
         <Grid item xs={12} md={12} lg={12}>
           <Paper className={classes.paper}>
             <Tabs
