@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const FormLogin = () => {
+const FormLogin = ({ data }) => {
   const [showPassword, setShowPassword] = useState(false)
   const handleShowClick = () => setShowPassword(!showPassword)
   const router = useRouter()
@@ -37,20 +37,22 @@ const FormLogin = () => {
     router.push('documentsSent')
   }
   const classes = useStyles()
+  console.log('csrfToken', data)
   return (
     <Container component="main" maxWidth="xs">
       <div className={classes.paper}>
         <Typography component="h1" variant="h6" color="inherit" noWrap >Iniciar sesión</Typography>
-        <form className={classes.form} noValidate>
+        <form method="post" action="/api/auth/callback/credentials" className={classes.form}>
+          <input name="csrfToken" type="hidden" defaultValue={data?.csrfToken} />
           <TextField
             variant="outlined"
             margin="normal"
             required
             fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
+            id="username"
+            label="Nombre de Usuario"
+            name="username"
+            autoComplete="username"
             autoFocus
           />
           <TextField
@@ -59,7 +61,7 @@ const FormLogin = () => {
             required
             fullWidth
             name="password"
-            label="Password"
+            label="Contraseña"
             type="password"
             id="password"
             autoComplete="current-password"
@@ -74,7 +76,8 @@ const FormLogin = () => {
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick={() => { console.log('clicked') }}
+            type="submit"
+          // onClick={() => { console.log('clicked') }}
           >
             Sign In
           </Button>

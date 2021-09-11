@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const TableData = () => {
+const TableData = ({ data }) => {
   const classes = useStyles();
   return (
     <React.Fragment>
@@ -39,21 +39,25 @@ const TableData = () => {
       <Table size="small">
         <TableHead>
           <TableRow>
-            <TableCell>Date</TableCell>
-            <TableCell>Name</TableCell>
-            <TableCell>Ship To</TableCell>
-            <TableCell>Payment Method</TableCell>
-            <TableCell align="right">Sale Amount</TableCell>
+            <TableCell>Folio</TableCell>
+            <TableCell>Fecha</TableCell>
+            <TableCell>Estado</TableCell>
+            <TableCell>Tipo de referencia</TableCell>
+            <TableCell align="center">Folio de referencia</TableCell>
+            <TableCell align="center">Instituto de referencia</TableCell>
+
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {data.map((row) => (
             <TableRow key={row.id}>
+              <TableCell>{row.folio_number}</TableCell>
               <TableCell>{row.date}</TableCell>
-              <TableCell>{row.name}</TableCell>
-              <TableCell>{row.shipTo}</TableCell>
-              <TableCell>{row.paymentMethod}</TableCell>
-              <TableCell align="right">{row.amount}</TableCell>
+              <TableCell>{row.status}</TableCell>
+              <TableCell>{row.type_reference}</TableCell>
+              <TableCell align="center">{row.folio_reference}</TableCell>
+              <TableCell align="center">{row.institute_province}</TableCell>
+
             </TableRow>
           ))}
         </TableBody>

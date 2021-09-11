@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useRouter } from 'next/router'
 // import styles from "./layout.module.css";
 // import { Container, Flex } from '@chakra-ui/react'
@@ -11,10 +11,13 @@ import AppBar from '@material-ui/core/AppBar';
 import { makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
 import Toolbar from '@material-ui/core/Toolbar';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import List from '@material-ui/core/List';
 import { MainListItems } from '../ListItems/ListItems'
+import { signIn, signOut, useSession } from 'next-auth/client'
+
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -35,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'flex-end',
     padding: '0 8px',
+    backgroundColor: '#4CAF50',
     ...theme.mixins.toolbar,
   },
   appBar: {
@@ -99,16 +103,19 @@ const useStyles = makeStyles((theme) => ({
 
 const Layout = ({ children }) => {
   const router = useRouter()
-  const [open, setOpen] = React.useState(true);
-  const [selectedItem, setSelectedItem] = React.useState({});
-
+  const [open, setOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState({});
+  const [session, loading] = useSession()
   const { route } = router
   const classes = useStyles();
   const handleDrawer = () => {
-    console.log('open', open)
     setOpen(!open);
-    console.log('open2', open)
   };
+  const handleLogin = () => {
+    session === null ? signIn() : signOut({ callbackUrl: 'http://localhost:3000/auth/login' })
+  };
+
+  const titleLogin = session === null ? 'Iniciar sesión' : 'Cerrar sesión'
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -126,6 +133,13 @@ const Layout = ({ children }) => {
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
             CONOFI
           </Typography>
+          <Typography variant="h6" component="h5" color="inherit" noWrap className={classes.title}>
+            {session?.user?.name}
+          </Typography>
+          {loading ? null :
+            <Button variant="contained" onClick={handleLogin}>{titleLogin}</Button>
+          }
+
         </Toolbar>
       </AppBar>
       <Drawer
@@ -141,8 +155,9 @@ const Layout = ({ children }) => {
           </IconButton>
         </div>
         <Divider />
-        <List><MainListItems onCLick={(title) => setSelectedItem({ [title]: true })} selected={selectedItem} /></List>
-        <Divider />
+        <List>
+          <MainListItems onCLick={(title) => setSelectedItem({ [title]: true })} selected={selectedItem} />
+        </List>
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />

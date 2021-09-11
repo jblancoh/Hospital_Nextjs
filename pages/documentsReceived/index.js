@@ -11,6 +11,44 @@ import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
+import { useSession, getSession } from 'next-auth/client'
+import { DocumentsSent } from '@api'
+// export const getServerSideProps = async (context) => {
+//   const session = await getSession(context)
+//   if (session === null) {
+//     // redirect
+//     return {
+//       redirect: {
+//         destination: '/api/auth/signin/',
+//         permanent: false
+//       }
+//     }
+//   }
+
+//   return {
+//     props: { session }
+//   }
+// }
+export const getStaticProps = async (props) => {
+  const session = await getSession(props)
+  const data = await DocumentsSent()
+  // console.log('getStaticProps session', session)
+  // console.log('getStaticProps data', data)
+
+  if (session === null) {
+    // redirect
+    return {
+      redirect: {
+        destination: '/api/auth/signIn/',
+        permanent: false
+      }
+    }
+  }
+
+  return {
+    props: { session }
+  }
+}
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -53,6 +91,7 @@ const DocumentsReceived = () => {
   const classes = useStyles()
   const [tabIndex, setTabIndex] = useState(0)
   const theme = useTheme();
+  const [session, loading] = useSession()
   const handleChange = (event, newValue) => {
     setTabIndex(newValue);
   };
@@ -70,6 +109,14 @@ const DocumentsReceived = () => {
     //   //   cleanup
     //   // }
   }, [tabIndex])
+
+
+  if (loading) {
+    return null
+  }
+  if (session === null) {
+    return <span>No has iniciado sesión</span>
+  }
 
   return (
     <Container maxWidth="lg" className={classes.container}>

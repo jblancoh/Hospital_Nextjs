@@ -51,7 +51,6 @@ const Dashboard = ({ children }) => {
 
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   useEffect(() => {
-    console.log('Dash useEffect')
     return () => {
       // cleanup
     }

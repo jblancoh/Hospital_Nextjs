@@ -3,6 +3,7 @@ import SwipeableViews from 'react-swipeable-views';
 import FormDocument from '@components/FormDocument/FormDocument'
 import Dashboard from '@components/Dashboard/Dashboard'
 import TableData from '@components/Table/Table'
+import TabPanel from '@components/TabPanel/TabPanel'
 import Container from '@material-ui/core/Container'
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
@@ -11,6 +12,8 @@ import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
+import { useSession, getSession } from 'next-auth/client'
+import getDocumentsSent from '../api/documentsSent'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -25,30 +28,29 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
+export const getServerSideProps = async (context) => {
+  const session = await getSession(context)
+  const documents = await getDocumentsSent(context)
+  if (session === null) {
+    // redirect
+    return {
+      redirect: {
+        destination: '/auth/login',
+        permanent: false
+      }
+    }
+  }
 
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`full-width-tabpanel-${index}`}
-      aria-labelledby={`full-width-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box p={3}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
+  return {
+    props: { session, documents }
+  }
 }
 
-const DocumentsSent = () => {
+const DocumentsSent = ({ documents }) => {
   const classes = useStyles()
   const [tabIndex, setTabIndex] = useState(0)
   const theme = useTheme();
+  const [session, loading] = useSession()
   const handleChange = (event, newValue) => {
     setTabIndex(newValue);
   };
@@ -56,6 +58,14 @@ const DocumentsSent = () => {
   const handleChangeIndex = (index) => {
     setTabIndex(index);
   };
+
+  if (loading) {
+    return null
+  }
+  if (session === null) {
+    return <span>No has iniciado sesión</span>
+  }
+
   return (
     <Container maxWidth="lg" className={classes.container}>
       <Grid container spacing={3}>
@@ -81,7 +91,7 @@ const DocumentsSent = () => {
                 <FormDocument />
               </TabPanel>
               <TabPanel value={tabIndex} index={1} dir={theme.direction}>
-                <TableData />
+                <TableData data={documents.results} />
               </TabPanel>
             </SwipeableViews>
           </Paper>

@@ -6,7 +6,7 @@ const ServiceItem = () => {
 
   return (
     <div>
-      Esta es la pagina del oficio recibido: {receivedId}
+      Esta es la pagina de oficio recibido: {receivedId}
     </div>
   );
 }
